@@ -9,7 +9,7 @@ function onrequest(req) {
   // log what file we're going to fetch:
   console.log("Loading: " + req.method +" "+ req.url + " "+ req.type);
 
-  if(req.requestHeaders[0].value.indexOf("google") >= 0) {
+  if(req.requestHeaders[0].value.indexOf("pagead2.googlesyndication.com") >= 0) {
     console.log("Request coming from Google");
   return {cancel:true};
   }
@@ -17,16 +17,16 @@ function onrequest(req) {
   for (x = 0; x< req.requestHeaders.length; x++) {
     
     if(req.requestHeaders[x].name == "User-Agent") {
-      req.requestHeaders[x].value = "";
+      req.requestHeaders[x].value = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/102.0";
     }
     else if(req.requestHeaders[x].name == "Accept-Language") {
-      req.requestHeaders[x].value = "pl";
+      req.requestHeaders[x].value = "en-US";
     }
   }
 
-  for(x = 0; x < req.requestHeaders.length; x++) {
-    console.log(req.requestHeaders[x]);
-  }
+  // for(x = 0; x < req.requestHeaders.length; x++) {
+  //   console.log(req.requestHeaders[x]);
+  // }
   // let's do something special if an image is loaded:
   if (req.type=="image") {
      console.log("Ooh, it's a picture!");
