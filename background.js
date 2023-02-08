@@ -8,7 +8,16 @@ function onrequest(req) {
 
   // log what file we're going to fetch:
   console.log("Loading: " + req.method +" "+ req.url + " "+ req.type);
-
+  for (x = 0; x< req.requestHeaders.length; x++) {
+    
+    if(req.requestHeaders[x].name == "User-Agent") {
+      req.requestHeaders[x].value = " ";
+    }
+    else if(req.requestHeaders[x].name == "")
+    
+    req.requestHeaders[x].Contains
+    console.log(req.requestHeaders[x]);
+  }
   // let's do something special if an image is loaded:
   if (req.type=="image") {
      console.log("Ooh, it's a picture!");
@@ -18,8 +27,10 @@ function onrequest(req) {
     console.log(req.requestHeaders[0].value);
     if(req.requestHeaders[0].value.indexOf("google") >= 0) {
       console.log("Request coming from Google");
-    // return {cancel:true};
+    return {cancel:true};
     }
+
+    
   }
   // req also contains an array called requestHeaders containing the name and value of each header.
   // You can access the name and value of the i'th header as req.requestHeaders[i].name and req.requestHeaders[i].value ,
