@@ -11,15 +11,21 @@ function onrequest(req) {
 
   // Check if the destination address of the request contains a tracking service
   // If thats the case cancel this request
-  if (req.requestHeaders[0].value.indexOf("pagead2.googlesyndication.com") >= 0 ||
-      req.requestHeaders[0].value.indexOf("scorecardresearch.com") >= 0) {
+  if (req.requestHeaders[0].value.indexOf("googlesyndication.com") >= 0 ||
+      req.requestHeaders[0].value.indexOf("doubleclick.net.com") >= 0 ||
+      req.requestHeaders[0].value.indexOf("googletagmanager.com") >= 0 ||
+      req.requestHeaders[0].value.indexOf("google-analytics.com") >= 0 ||
+      req.requestHeaders[0].value.indexOf("googleadservices.com") >= 0 ||
+      req.requestHeaders[0].value.indexOf("scorecardresearch.com") >= 0 ||
+      req.requestHeaders[0].value.indexOf("googletagservices.com") >= 0 ||
+      req.requestHeaders[0].value.indexOf("2mdn.net") >= 0 )
+  {
     console.log("Cancelled tracking request");
     return {cancel: true};
   }
 
   //Always show Mozilla as user agent, en-Us as a language and don't send cookie
   for (x = 0; x < req.requestHeaders.length; x++) {
-
     if (req.requestHeaders[x].name == "User-Agent") {
       req.requestHeaders[x].value = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/102.0";
     } else if (req.requestHeaders[x].name == "Accept-Language") {
