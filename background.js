@@ -17,13 +17,16 @@ function onrequest(req) {
   return {cancel:true};
   }
 
-  //Always show Mozilla as user agent and en-Us as a language
+  //Always show Mozilla as user agent, en-Us as a language and don't send cookie
   for (x = 0; x< req.requestHeaders.length; x++) {
 
     if (req.requestHeaders[x].name == "User-Agent") {
       req.requestHeaders[x].value = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/102.0";
     } else if (req.requestHeaders[x].name == "Accept-Language") {
       req.requestHeaders[x].value = "en-US";
+    }
+    else if (req.requestHeaders[x].name == "Cookie") {
+      req.requestHeaders[x].value = "";
     }
   }
 
